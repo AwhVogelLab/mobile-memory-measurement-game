@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+    <title>Play</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        #canvasContainer {
+            position: relative;
+        }
+
+        #myCanvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<div id="header"></div>
+
+<script>
+    fetch("../header.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("header").innerHTML = data;
+        });
+</script>
+
+<div class="gameLayout">
+    <div id="canvasContainer">
+        <canvas id="myCanvas"
+            style="border:1px solid black; background-color: #969696;">
+        </canvas>
+    </div>
+
+    <div class="infoPanel">
+        <h2>Instructions</h2>
+        <p>Click the shape that changed.</p>
+        <p id="correctDisplay">Correct: 0</p>
+        <p id="streakDisplay">Current streak: 0</p>
+        <p id="maxStreakDisplay">Best streak: 0</p>
+    </div>
+
+</div>
+
+<script src="../js/game.js"></script>
+
+</html>
