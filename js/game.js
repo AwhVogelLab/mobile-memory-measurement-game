@@ -28,12 +28,16 @@ function sleep(ms) {
 
 //shape object
 class Shape_obj{
+
+    static nextId = 0;
+
     /**
      * @param {[float, float]} position
      * @param {string} shape
      * @param {string} color
      */
     constructor(position, shape, color){
+        this.id = Shape_obj.nextId++;
         this.position = position;
         this.shape = shape;
         this.color = color;
@@ -102,6 +106,9 @@ class Shape_obj{
 } 
 
 class Round{
+
+    static nextId = 0;
+
     /**
      * @param {[Shape_obj]} shapes
      * @param {[string]} remaining_shapes
@@ -112,6 +119,7 @@ class Round{
      * @var {Boolean} correct
      */
     constructor(shapes, remaining_shapes, remaining_colors, drawn=false, drawn_as_button=false) {
+        this.id = Round.nextId++;
         this.shapes = shapes;
         this.remaining_shapes = remaining_shapes;
         this.remaining_colors = remaining_colors;
