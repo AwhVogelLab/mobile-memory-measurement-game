@@ -10,7 +10,7 @@ const imageCache = new Map();
 
 //create canvas object
 const canvas = document.getElementById("myCanvas");
-let canvas_size = Math.min(window.innerHeight - 100, window.innerWidth - 100);
+let canvas_size = Math.min(window.innerHeight - 200, window.innerWidth - 100);
 canvas.width = canvas_size;
 canvas.height = canvas_size;
 const ctx = canvas.getContext("2d");
@@ -204,7 +204,8 @@ class Game{
             let x;
             let y;
             let rerandomize = true
-            let times = 0;
+            let attempts = 0;
+            let maxAttempts = 1000;
             do{
                 rerandomize = false
                 x = Math.random() * (canvas_size - img_size);
@@ -212,11 +213,18 @@ class Game{
                 //If the shape is too close to another, it will relocate it
                 for (let j = 0; j < images.length; j++){
                     if (distance([x, y], images[j].position) < distance([0, 0], [img_size*1.2, img_size*1.2])){
-                        rerandomize = true
+                        rerandomize = true;
+                        break;
+                        console.log("Replacing shape");
                     }
                 }
-                times++;
-            } while (rerandomize)
+                attempts++;
+            } while (rerandomize && attempts < maxAttempts)
+
+            if (attempts >= maxAttempts) {
+                console.log("Could not place shape after", maxAttempts, "attempts");
+                return null; 
+            }
 
             image.position = [x, y];
 
@@ -233,22 +241,40 @@ class Game{
     }   
 
     new_round(num_shapes){
-        this.rounds.push(this.generate_shapes(num_shapes))
+        const maxRetries = 5;
+
+        for (let retry = 0; retry < maxRetries; retry++) {
+            const round = this.generate_shapes(num_shapes);
+
+            if (round !== null) {
+                this.rounds.push(round);
+                return true;
+            }
+
+            console.warn(`Round generation failed, retry ${retry + 1}/${maxRetries}`);
+        }
+
+        console.error("Could not generate round");
+        return false;
     }
 
     async button_functionality(clicked_shape){
         let sound;
         if (clicked_shape === this.rounds[this.current_round].shape_changed) {
+            //correct shape chosen
             this.rounds[this.current_round].correct = true;
             this.num_correct++;
-            playSound("correct", 0.5, 1 + /*Math.min(this.streak, 4)*/ this.streak * 0.025);
+            playSound("correct", 0.5, 1 + Math.min(this.streak, 4) * 0.025);
             this.streak++;
             this.max_streak = Math.max(this.streak, this.max_streak);
+            canvas.style.border = "5px solid green";
         } else {
+            //incorrect shape chosen
             this.rounds[this.current_round].correct = false;
             this.num_wrong++;
             this.streak = 0;
             playSound("incorrect", 0.5);
+            canvas.style.border = "5px solid red";
         }
         this.rounds[this.current_round].clear_buttons();
         console.log("Round: ", this.current_round);
@@ -257,7 +283,9 @@ class Game{
         this.updateStats();
         this.new_round(5);
         this.current_round++;
-        await sleep(1000);
+        await sleep(800);
+        canvas.style.border = "1px solid black";
+        await sleep(200);
         this.start_round();
     }
 
@@ -311,6 +339,7 @@ function create_start_button() {
     container.style.height = canvas_size + "px";
     console.log(container.height)
     const btn = document.createElement("button");
+    btn.classList.add("startButton");
     btn.style.position = "absolute";
     btn.style.top = "50%";
     btn.style.left = "50%";
