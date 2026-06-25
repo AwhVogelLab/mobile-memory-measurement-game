@@ -52,11 +52,11 @@ class Shape_obj{
     set_color(color){
         this.color = color
     }
-
+    //obtains source for the image
     get_src() {
         return `${shape_folder}${this.shape}/${this.shape}_${this.color}.png`;
     }
-
+    //draws image on the canvas
     draw(ctx, size) {
         const img = imageCache.get(this.get_src());
 
@@ -67,7 +67,7 @@ class Shape_obj{
 
         ctx.drawImage(img, this.position[0], this.position[1], size, size)
     }
-
+    //creates a button on the canvas
     create_button(size, onClick) {
         const container = document.getElementById("canvasContainer");
 
@@ -97,7 +97,7 @@ class Shape_obj{
 
         return button;
     }
-
+    //moves the shape's position by dx, dy
     move(dx, dy) {
         this.position[0] += dx;
         this.position[1] += dy;
@@ -277,14 +277,11 @@ class Game{
             canvas.style.border = "5px solid red";
         }
         this.rounds[this.current_round].clear_buttons();
-        console.log("Round: ", this.current_round);
-        console.log("Correct: ", this.num_correct);
-        console.log("Wrong: ", this.num_wrong);
-        this.updateStats();
         this.new_round(5);
         this.current_round++;
+        this.updateStats();
         await sleep(800);
-        canvas.style.border = "1px solid black";
+        canvas.style.border = "5px solid #b8c1ec";
         await sleep(200);
         this.start_round();
     }
@@ -309,9 +306,21 @@ class Game{
         return 0;
     }
 
+    getAccuracyColor(pct) {
+        // red → yellow → green
+        const r = pct < 50 ? 255 : Math.floor(255 - (pct - 50) * 5.1);
+        const g = pct < 50 ? Math.floor(pct * 5.1) : 255;
+        return `rgb(${r}, ${g}, 0)`;
+    }
+
     updateStats(){
-        document.getElementById("correctDisplay").textContent =
-        `Correct: ${this.num_correct}/${this.num_wrong+this.num_correct}`;
+        document.getElementById("roundDisplay").textContent =
+        `Round: ${this.current_round+1}`;
+
+        let accuracy = this.num_correct/(this.num_wrong+this.num_correct)*100;
+        document.getElementById("accuracyDisplay").textContent =
+        `Accuracy: ${accuracy.toFixed(2)}%`;
+        document.getElementById("accuracyDisplay").style.color = this.getAccuracyColor(accuracy);
 
         document.getElementById("streakDisplay").textContent =
         `Current streak: ${this.streak}`;

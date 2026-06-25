@@ -26,10 +26,11 @@ nav a:hover {
 
 /*displaying canvas and info text*/
 .gameLayout {
+    flex: 1;
     display: flex;
     gap: 20px;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center; 
 }
 
 /* Desktop */
@@ -48,6 +49,15 @@ nav a:hover {
         max-width: 90%;
         text-align: center;
     }
+}
+
+/* text size */
+.infoPanel h2 {
+    font-size: clamp(24px, 3vw, 40px);
+}
+
+.infoPanel p {
+    font-size: clamp(16px, 2vw, 22px);
 }
 
 .startButton {

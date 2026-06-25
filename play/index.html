@@ -10,6 +10,11 @@
         #myCanvas {
             display: block;
         }
+
+        #accuracyDisplay {
+            font-weight: bold;
+            color: #2e7d32;
+        }
     </style>
 </head>
 
@@ -26,14 +31,15 @@
 <div class="gameLayout">
     <div id="canvasContainer">
         <canvas id="myCanvas"
-            style="border:1px solid black; background-color: #969696;">
+            style="border:5px solid #b8c1ec; background-color: #969696;">
         </canvas>
     </div>
 
     <div class="infoPanel">
         <h2>Instructions</h2>
         <p>Click the shape that changed.</p>
-        <p id="correctDisplay">Correct: 0</p>
+        <p id="roundDisplay">Round: 1</p>
+        <p id="accuracyDisplay">Accuracy: 0%</p>
         <p id="streakDisplay">Current streak: 0</p>
         <p id="maxStreakDisplay">Best streak: 0</p>
     </div>
