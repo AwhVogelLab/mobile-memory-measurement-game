@@ -132,12 +132,12 @@ class Round{
     change_one_shape(s){
         this.shapes[s].set_shape(this.remaining_shapes[Math.floor(Math.random()*this.remaining_shapes.length)])
         this.shape_changed = this.shapes[s]
-        console.log("shape", s)
+        //console.log("shape", s)
     }
     change_one_color(s){
         this.shapes[s].set_color(this.remaining_colors[Math.floor(Math.random()*this.remaining_colors.length)])
         this.shape_changed = this.shapes[s]
-        console.log("color", s)
+        //console.log("color", s)
     }
 
     draw_images(){
@@ -168,14 +168,16 @@ class Game{
     /**
      * @param {[Round]} rounds
      * @param {Integer} current_round
+     * @param {Integer} max_rounds
      * @param {Integer} num_correct
      * @param {Integer} num_wrong
      * @param {Integer} streak
      * @param {Integer} max_streak
      */
-    constructor(rounds = [], current_round = 0, num_correct = 0, num_wrong = 0, streak = 0, max_streak = 0){
+    constructor(rounds = [], current_round = 0, max_rounds = 20, num_correct = 0, num_wrong = 0, streak = 0, max_streak = 0){
         this.rounds = rounds;
         this.current_round = current_round;
+        this.max_rounds = max_rounds;
         this.num_correct = num_correct;
         this.num_wrong = num_wrong;
         this.streak = streak;
@@ -214,8 +216,8 @@ class Game{
                 for (let j = 0; j < images.length; j++){
                     if (distance([x, y], images[j].position) < distance([0, 0], [img_size*1.2, img_size*1.2])){
                         rerandomize = true;
-                        break;
                         console.log("Replacing shape");
+                        break;
                     }
                 }
                 attempts++;
@@ -228,12 +230,12 @@ class Game{
 
             image.position = [x, y];
 
-            console.log(image);
+            //console.log(image);
 
             //add shape to array
             images.push(image)
         }
-        console.log(images)            
+        //console.log(images)            
 
         let new_round = new Round(images, temp_image_folders, temp_colors)
 
@@ -277,13 +279,22 @@ class Game{
             canvas.style.border = "5px solid red";
         }
         this.rounds[this.current_round].clear_buttons();
-        this.new_round(5);
-        this.current_round++;
-        this.updateStats();
-        await sleep(800);
-        canvas.style.border = "5px solid #b8c1ec";
-        await sleep(200);
-        this.start_round();
+    }
+
+    async start_game(){
+        while (this.current_round < this.max_rounds) {
+            this.new_round(5);
+            await this.start_round();
+
+            this.current_round++;
+            this.updateStats();
+
+            await sleep(800);
+            canvas.style.border = "5px solid #b8c1ec";
+            await sleep(200);
+        }
+
+        return this;
     }
 
     async start_round(){
@@ -299,11 +310,13 @@ class Game{
         else {
             this.rounds[this.current_round].change_one_color(s)
         }
-
-        this.rounds[this.current_round].display_buttons((clicked_shape) => 
-            this.button_functionality(clicked_shape))
-
-        return 0;
+        await new Promise((resolve) => {
+            this.rounds[this.current_round].display_buttons(async (clicked_shape) => {
+                await this.button_functionality(clicked_shape);
+                resolve();
+            });
+        });
+        
     }
 
     getAccuracyColor(pct) {
@@ -346,7 +359,7 @@ function create_start_button() {
     const container = document.getElementById("canvasContainer");
     container.style.width = canvas_size + "px";
     container.style.height = canvas_size + "px";
-    console.log(container.height)
+    //console.log(container.height)
     const btn = document.createElement("button");
     btn.classList.add("startButton");
     btn.style.position = "absolute";
@@ -369,7 +382,7 @@ function distance(pos1, pos2) {
     return Math.sqrt(Math.pow(pos1[0] - pos2[0], 2) + Math.pow(pos1[1] - pos2[1], 2))
 }
 
-function start_game() {
+async function start_game() {
     num = 5;
     game = new Game();
     /*document.body.appendChild(createSlider(0.08, 0.2, 0.15, 0.002, 0, 
@@ -387,8 +400,9 @@ function start_game() {
 
         }, "Shape Size")
     );*/
-    game.new_round(num)
-    game.start_round()
+    const result = await game.start_game();
+    console.log(result);
+    
 
 }
 
