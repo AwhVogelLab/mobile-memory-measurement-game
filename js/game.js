@@ -174,7 +174,7 @@ class Game{
      * @param {Integer} streak
      * @param {Integer} max_streak
      */
-    constructor(rounds = [], current_round = 0, max_rounds = 20, num_correct = 0, num_wrong = 0, streak = 0, max_streak = 0){
+    constructor(rounds = [], current_round = 0, max_rounds = 20, num_correct = 0, num_wrong = 0, streak = 0, max_streak = 0, points = 0){
         this.rounds = rounds;
         this.current_round = current_round;
         this.max_rounds = max_rounds;
@@ -182,6 +182,7 @@ class Game{
         this.num_wrong = num_wrong;
         this.streak = streak;
         this.max_streak = max_streak;
+        this.points = points;
     }
 
     generate_shapes(num) {
@@ -216,7 +217,6 @@ class Game{
                 for (let j = 0; j < images.length; j++){
                     if (distance([x, y], images[j].position) < distance([0, 0], [img_size*1.2, img_size*1.2])){
                         rerandomize = true;
-                        console.log("Replacing shape");
                         break;
                     }
                 }
@@ -260,8 +260,13 @@ class Game{
         return false;
     }
 
-    async button_functionality(clicked_shape){
-        let sound;
+    calculate_points(reaction_time){
+        let p = 2 /((reaction_time/1000) + 1);
+        p *= Math.log(this.streak+1);
+        this.points += Math.trunc(p * 1000);
+    }
+
+    async button_functionality(clicked_shape, reaction_time){
         if (clicked_shape === this.rounds[this.current_round].shape_changed) {
             //correct shape chosen
             this.rounds[this.current_round].correct = true;
@@ -269,6 +274,7 @@ class Game{
             playSound("correct", 0.5, 1 + Math.min(this.streak, 4) * 0.025);
             this.streak++;
             this.max_streak = Math.max(this.streak, this.max_streak);
+            this.calculate_points(reaction_time);
             canvas.style.border = "5px solid green";
         } else {
             //incorrect shape chosen
@@ -311,8 +317,10 @@ class Game{
             this.rounds[this.current_round].change_one_color(s)
         }
         await new Promise((resolve) => {
+            let start_time = performance.now();
             this.rounds[this.current_round].display_buttons(async (clicked_shape) => {
-                await this.button_functionality(clicked_shape);
+                let reaction_time = performance.now() - start_time;
+                await this.button_functionality(clicked_shape, reaction_time);
                 resolve();
             });
         });
@@ -330,13 +338,8 @@ class Game{
         document.getElementById("roundDisplay").textContent =
         `Round: ${this.current_round+1}`;
 
-        let accuracy = this.num_correct/(this.num_wrong+this.num_correct)*100;
-        document.getElementById("accuracyDisplay").textContent =
-        `Accuracy: ${accuracy.toFixed(2)}%`;
-        document.getElementById("accuracyDisplay").style.color = this.getAccuracyColor(accuracy);
-
-        document.getElementById("streakDisplay").textContent =
-        `Current streak: ${this.streak}`;
+        document.getElementById("pointDisplay").textContent =
+        `Points: ${this.points}`;
 
         document.getElementById("maxStreakDisplay").textContent =
         `Best streak: ${this.max_streak}`;
