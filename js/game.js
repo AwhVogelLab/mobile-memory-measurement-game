@@ -35,12 +35,16 @@ class Shape_obj{
      * @param {[float, float]} position
      * @param {string} shape
      * @param {string} color
+     * @var {string} prev_shape
+     * @var {string} prev_color
      */
     constructor(position, shape, color){
         this.id = Shape_obj.nextId++;
         this.position = position;
         this.shape = shape;
         this.color = color;
+        this.prev_shape = null;
+        this.prev_color = null;
     }
 
     set_position(pos) {
@@ -115,28 +119,36 @@ class Round{
      * @param {[string]} remaining_colors
      * @param {boolean} drawn
      * @param {boolean} drawn_as_button
+     * @param {Number} reaction_time
      * @var {Shape_obj} shape_changed
+     * @var {string} changed_attribute
      * @var {Boolean} correct
      */
-    constructor(shapes, remaining_shapes, remaining_colors, drawn=false, drawn_as_button=false) {
+    constructor(shapes, remaining_shapes, remaining_colors, drawn=false, drawn_as_button=false, reaction_time=0) {
         this.id = Round.nextId++;
         this.shapes = shapes;
         this.remaining_shapes = remaining_shapes;
         this.remaining_colors = remaining_colors;
         this.drawn = drawn;
         this.drawn_as_button = drawn_as_button;
-        this.shape_changed;
-        this.correct;
+        this.reaction_time = reaction_time;
+        this.shape_changed = null;
+        this.changed_attribute = null;
+        this.correct = null;
     }
 
     change_one_shape(s){
+        this.shapes[s].prev_shape = this.shapes[s].shape;
         this.shapes[s].set_shape(this.remaining_shapes[Math.floor(Math.random()*this.remaining_shapes.length)])
         this.shape_changed = this.shapes[s]
+        this.changed_attribute = "shape";
         //console.log("shape", s)
     }
     change_one_color(s){
+        this.shapes[s].prev_color = this.shapes[s].color;
         this.shapes[s].set_color(this.remaining_colors[Math.floor(Math.random()*this.remaining_colors.length)])
         this.shape_changed = this.shapes[s]
+        this.changed_attribute = "color";
         //console.log("color", s)
     }
 
@@ -266,7 +278,7 @@ class Game{
         this.points += Math.trunc(p * 1000);
     }
 
-    async button_functionality(clicked_shape, reaction_time){
+    async button_functionality(clicked_shape){
         if (clicked_shape === this.rounds[this.current_round].shape_changed) {
             //correct shape chosen
             this.rounds[this.current_round].correct = true;
@@ -274,7 +286,7 @@ class Game{
             playSound("correct", 0.5, 1 + Math.min(this.streak, 4) * 0.025);
             this.streak++;
             this.max_streak = Math.max(this.streak, this.max_streak);
-            this.calculate_points(reaction_time);
+            this.calculate_points(this.rounds[this.current_round].reaction_time);
             canvas.style.border = "5px solid green";
         } else {
             //incorrect shape chosen
@@ -289,8 +301,9 @@ class Game{
 
     async start_game(){
         while (this.current_round < this.max_rounds) {
-            this.new_round(5);
-            await this.start_round();
+            let num_shapes = 5;
+            this.new_round(num_shapes);
+            await this.start_round(num_shapes);
 
             this.current_round++;
             this.updateStats();
@@ -303,13 +316,13 @@ class Game{
         return this;
     }
 
-    async start_round(){
+    async start_round(num_shapes){
         this.rounds[this.current_round].draw_images();
         await sleep(300)
         this.rounds[this.current_round].clear_drawings();
         await sleep(1000)
 
-        let s = Math.floor(Math.random()*5);
+        let s = Math.floor(Math.random()*num_shapes);
         if (Math.random() > 0.5) {
             this.rounds[this.current_round].change_one_shape(s)
         }
@@ -319,8 +332,8 @@ class Game{
         await new Promise((resolve) => {
             let start_time = performance.now();
             this.rounds[this.current_round].display_buttons(async (clicked_shape) => {
-                let reaction_time = performance.now() - start_time;
-                await this.button_functionality(clicked_shape, reaction_time);
+                this.rounds[this.current_round].reaction_time = performance.now() - start_time;
+                await this.button_functionality(clicked_shape);
                 resolve();
             });
         });
@@ -332,6 +345,14 @@ class Game{
         const r = pct < 50 ? 255 : Math.floor(255 - (pct - 50) * 5.1);
         const g = pct < 50 ? Math.floor(pct * 5.1) : 255;
         return `rgb(${r}, ${g}, 0)`;
+    }
+
+    averageReactionTime() {
+        let tot = 0
+        for (const round of this.rounds){
+            tot += round.reaction_time;
+        }
+        return tot/this.rounds.length
     }
 
     updateStats(){
@@ -386,27 +407,35 @@ function distance(pos1, pos2) {
 }
 
 async function start_game() {
-    num = 5;
     game = new Game();
-    /*document.body.appendChild(createSlider(0.08, 0.2, 0.15, 0.002, 0, 
-        (value) => {
-            img_size = canvas_size * value;
-            if (game.rounds[game.current_round].drawn == true){
-                game.rounds[game.current_round].clear_drawings()
-                game.rounds[game.current_round].draw_images()
-            }
-            if (game.rounds[game.current_round].drawn_as_button == true){
-                game.rounds[game.current_round].clear_buttons()
-                game.rounds[game.current_round].display_buttons((clicked_shape) => 
-                    game.button_functionality(clicked_shape))
-            }
+    await game.start_game();
 
-        }, "Shape Size")
-    );*/
-    const result = await game.start_game();
-    console.log(result);
-    
+    console.log(game);
 
+    end_screen(game);
+
+}
+
+function end_screen(game) {
+    document.getElementById("gameLayout").hidden = true;
+    document.getElementById("gameLayout").style.display = "none";
+    // document.getElementById("canvasContainer").hidden = true;
+    // document.getElementById("infoPanel").hidden = true;
+
+    document.getElementById("resultsScreen").hidden = false;
+
+    document.getElementById("correct").textContent = `${game.num_correct}/${game.num_correct+game.num_wrong}`;
+
+    document.getElementById("bestStreak").textContent = game.max_streak;
+
+    const accuracy =
+        100 * game.num_correct / (game.num_correct + game.num_wrong);
+
+    document.getElementById("accuracy").textContent =
+        accuracy.toFixed(1) + "%";
+
+    document.getElementById("avgTime").textContent =
+        game.averageReactionTime().toFixed(0);
 }
 
 async function loadSound(name, url) {

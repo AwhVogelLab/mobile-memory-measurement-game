@@ -50,3 +50,8 @@
 .startButton:hover {
     background: #43a047;
 }
+
+.resultsScreen {
+    justify-content: center;
+    align-items: center; 
+}

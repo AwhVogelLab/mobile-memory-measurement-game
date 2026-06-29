@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Play</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/game.css">
@@ -29,14 +30,14 @@
         });
 </script>
 
-<div class="gameLayout">
+<div id="gameLayout" class="gameLayout">
     <div id="canvasContainer">
         <canvas id="myCanvas"
             style="border:5px solid #b8c1ec; background-color: #969696;">
         </canvas>
     </div>
 
-    <div class="infoPanel">
+    <div class="infoPanel" id="infoPanel">
         <h2>Instructions</h2>
         <p>Click the shape that changed.</p>
         <p id="roundDisplay">Round: 1</p>
@@ -44,6 +45,15 @@
         <p id="maxStreakDisplay">Best streak: 0</p>
     </div>
 
+</div>
+
+<div id="resultsScreen" hidden>
+    <h1>Level Completed</h1>
+
+    <p>Correct: <span id="correct"></span></p>
+    <p>Accuracy: <span id="accuracy"></span></p>
+    <p>Best Streak: <span id="bestStreak"></span></p>
+    <p>Average reaction: <span id="avgTime"></span> ms</p>
 </div>
 
 <script src="../js/game.js"></script>
