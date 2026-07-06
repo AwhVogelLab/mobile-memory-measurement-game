@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Standard Play</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/game.css">
+    <style>
+        #canvasContainer {
+            position: relative;
+        }
+
+        #myCanvas {
+            display: block;
+        }
+
+        #accuracyDisplay {
+            font-weight: bold;
+            color: #2e7d32;
+        }
+    </style>
+</head>
+
+<div id="header"></div>
+
+<script>
+    fetch("/header.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("header").innerHTML = data;
+        });
+</script>
+
+<div id="gameLayout" class="gameLayout">
+    <div id="canvasContainer">
+        <canvas id="myCanvas"
+            style="border:5px solid #b8c1ec; background-color: #969696;">
+        </canvas>
+    </div>
+
+    <div class="infoPanel" id="infoPanel">
+        <h2 class="instructions">Standard Play</h2>
+        <p class="instructions">Click the shape that changed.</p>
+        <p id="roundDisplay">Round: 1</p>
+        <p id="pointDisplay">Points: 0</p>
+        <p id="maxStreakDisplay">Best streak: 0</p>
+    </div>
+
+</div>
+
+<div id="resultsScreen" hidden>
+    <h1>Level Completed</h1>
+
+    <p>Correct: <span id="correct"></span></p>
+    <p>Accuracy: <span id="accuracy"></span></p>
+    <p>Best Streak: <span id="bestStreak"></span></p>
+    <p>Average reaction: <span id="avgTime"></span> ms</p>
+</div>
+
+<script type="module" src="/js/standard.js"></script>
+
+</html>

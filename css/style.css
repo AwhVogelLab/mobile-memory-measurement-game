@@ -12,6 +12,9 @@ body {
 nav {
     background-color: #333;
     padding: 10px;
+    display: flex;        
+    align-items: center;
+    gap: 15px; 
 }
 
 nav a {
@@ -24,6 +27,32 @@ nav a:hover {
     color: #00ccff;
 }
 
-.hidden {
+/* Dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
     display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #444;
+    min-width: 160px;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    color: white;
+}
+
+.dropdown-content a:hover {
+    background-color: #555;
+    color: #00ccff;
+}
+
+/* Show the dropdown on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
 }

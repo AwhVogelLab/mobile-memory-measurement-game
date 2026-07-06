@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Play</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/game.css">
+    <title>Freeplay</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/game.css">
     <style>
         #canvasContainer {
             position: relative;
@@ -23,7 +23,7 @@
 <div id="header"></div>
 
 <script>
-    fetch("../header.html")
+    fetch("/header.html")
         .then(response => response.text())
         .then(data => {
             document.getElementById("header").innerHTML = data;
@@ -38,8 +38,8 @@
     </div>
 
     <div class="infoPanel" id="infoPanel">
-        <h2>Instructions</h2>
-        <p>Click the shape that changed.</p>
+        <h2 class="instructions">Freeplay</h2>
+        <p class="instructions">Click the shape that changed.</p>
         <p id="roundDisplay">Round: 1</p>
         <p id="pointDisplay">Points: 0</p>
         <p id="maxStreakDisplay">Best streak: 0</p>
@@ -50,12 +50,10 @@
 <div id="resultsScreen" hidden>
     <h1>Level Completed</h1>
 
-    <p>Correct: <span id="correct"></span></p>
-    <p>Accuracy: <span id="accuracy"></span></p>
-    <p>Best Streak: <span id="bestStreak"></span></p>
+    <p>Streak: <span id="bestStreak"></span></p>
     <p>Average reaction: <span id="avgTime"></span> ms</p>
 </div>
 
-<script src="../js/game.js"></script>
+<script type="module" src="/js/freeplay.js"></script>
 
 </html>
