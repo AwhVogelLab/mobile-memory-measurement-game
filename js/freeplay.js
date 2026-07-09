@@ -31,30 +31,38 @@ function create_start_button() {
     container.style.width = canvas_size + "px";
     container.style.height = canvas_size + "px";
     //console.log(container.height)
-    const btn = document.createElement("button");
-    btn.classList.add("startButton");
-    btn.style.position = "absolute";
-    btn.style.top = "50%";
-    btn.style.left = "50%";
-    btn.style.transform = "translate(-50%, -50%)";
-    btn.style.padding = "10px 20px";
-    btn.style.zIndex = "10";
-    btn.style.fontSize = "64px";
-    btn.innerText = "Start"
-    btn.addEventListener('click', () => {
-        start_game();
-        btn.remove();
-        let divsToHide = document.getElementsByClassName("instructions");
-        for (let v = 0; v<divsToHide.length; v++){
-            divsToHide[v].hidden = true;
-        }
+
+    const buttonContainer = document.createElement("div");
+
+    buttonContainer.style.position = "absolute";
+    buttonContainer.style.top = "50%";
+    buttonContainer.style.left = "50%";
+    buttonContainer.style.transform = "translate(-50%, -50%)";
+    buttonContainer.style.zIndex = "10";
+    [4,5].forEach(val => {
+        const btn = document.createElement("button");
+        btn.classList.add("startButton");
+        btn.style.padding = "10px 20px";
+        btn.style.fontSize = "64px";
+        btn.innerText = `Start (${val})`
+        btn.addEventListener('click', () => {
+            start_game(val);
+            buttonContainer.remove();
+            let divsToHide = document.getElementsByClassName("instructions");
+            for (let v = 0; v<divsToHide.length; v++){
+                divsToHide[v].hidden = true;
+            }
+        })
+
+        buttonContainer.appendChild(btn);
+    
     });
 
-    container.appendChild(btn);
+    container.appendChild(buttonContainer);
 }
 
-async function start_game() {
-    const game = new Game([], 0, -1, 4);
+async function start_game(num) {
+    const game = new Game([], 0, -1, num);
     await game.start_game();
 
     console.log(game);
