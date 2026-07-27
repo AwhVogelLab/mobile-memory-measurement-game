@@ -10,7 +10,7 @@ export const imageCache = new Map();
 
 //create canvas object
 export const canvas = document.getElementById("myCanvas");
-export let canvas_size = Math.min(window.innerHeight - 200, window.innerWidth - 100);
+export let canvas_size = Math.min(window.innerHeight - 344, window.innerWidth - 100);
 canvas.width = canvas_size;
 canvas.height = canvas_size;
 export const ctx = canvas.getContext("2d");

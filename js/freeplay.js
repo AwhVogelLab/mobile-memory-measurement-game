@@ -13,7 +13,7 @@ import {
     distance
 } from "./globals.js";
 
-import { Game } from "./game.js";
+import { Game, preloadImages } from "./game.js";
 
 async function setup() {
     
@@ -90,31 +90,6 @@ async function loadSound(name, url) {
     const arrayBuffer = await response.arrayBuffer();
     const buffer = await audioContext.decodeAudioData(arrayBuffer);
     sounds.set(name, buffer);
-}
-
-async function preloadImages() {
-    const promises = [];
-
-    for (const shape of image_folders) {
-        for (const color of colors) {
-            const src = `${shape_folder}${shape}/${shape}_${color}.png`;
-
-            const img = new Image();
-
-            const promise = new Promise((resolve, reject) => {
-                img.onload = () => {
-                    imageCache.set(src, img);
-                    resolve();
-                };
-                img.onerror = reject;
-            });
-
-            img.src = src;
-            promises.push(promise);
-        }
-    }
-
-    await Promise.all(promises);
 }
 
 function createSlider(min, max, start, step, num, func, labelText){

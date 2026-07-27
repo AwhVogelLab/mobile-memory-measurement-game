@@ -185,6 +185,37 @@ export class Game{
         this.points = points;
     }
 
+    create_bubbles() {
+        const src = "/Assets/Game_Page/Bubble (Disabled).png";
+        const size = 25;
+
+        const imgTemplate = imageCache.get(src);
+
+        if (!imgTemplate) {
+            console.error("Missing image:", src);
+            return;
+        }
+
+        let c = document.getElementById("canvasContainer");
+        let canvas_rect = c.getBoundingClientRect();
+
+        for (let i = 0; i < this.max_rounds; i++){
+            const img = imgTemplate.cloneNode(true);
+
+            img.id = `bubble_${i}`;
+            img.classList.add("bubble");
+
+            img.style.position = "fixed";
+            img.style.width = `${size}px`;
+            img.style.height = "auto";
+            img.style.left = `${canvas_rect.left + 25 + ((i % 10) * 40)}px`;
+            img.style.top = `${canvas_rect.bottom + 15 + (40 * Math.trunc(i/10))}px`;
+
+            document.getElementById("gameBackground").appendChild(img);
+
+        }
+    }
+
     generate_shapes() {
         //used to track the location of shapes and make sure shapes do not overlap
         let images = [];
@@ -271,11 +302,12 @@ export class Game{
             //correct shape chosen
             this.rounds[this.current_round].correct = true;
             this.num_correct++;
-            playSound("correct", 0.5, 1 + Math.min(this.streak, 4) * 0.025);
+            playSound("correct", 0.5, 1 + this.streak * 0.025);
             this.streak++;
             this.max_streak = Math.max(this.streak, this.max_streak);
             this.calculate_points(this.rounds[this.current_round].reaction_time);
             canvas.style.border = "5px solid green";
+            document.getElementById(`bubble_${this.current_round}`).src = "/Assets/Game_Page/Bubble (Enabled).png"
         } else {
             //incorrect shape chosen
             this.rounds[this.current_round].correct = false;
@@ -288,6 +320,7 @@ export class Game{
     }
 
     async start_game(){
+        this.create_bubbles();
         while ((this.current_round < this.max_rounds) || this.max_rounds === -1) {
             this.new_round();
             await this.start_round();
@@ -374,4 +407,59 @@ function playSound(name, volume = 1, pitch = 1) {
     gain.connect(audioContext.destination);
 
     source.start();
+}
+
+export async function preloadImages() {
+    const promises = [];
+
+    for (const shape of image_folders) {
+        for (const color of colors) {
+            const src = `${shape_folder}${shape}/${shape}_${color}.png`;
+
+            const img = new Image();
+
+            const promise = new Promise((resolve, reject) => {
+                img.onload = () => {
+                    imageCache.set(src, img);
+                    resolve();
+                };
+                img.onerror = reject;
+            });
+
+            img.src = src;
+            promises.push(promise);
+        }
+    }
+
+    const src = "/Assets/Game_Page/Bubble (Disabled).png";
+
+    const img = new Image();
+
+    const promise = new Promise((resolve, reject) => {
+        img.onload = () => {
+            imageCache.set(src, img);
+            resolve();
+        };
+        img.onerror = reject;
+    });
+
+    img.src = src;
+    promises.push(promise);
+
+    const src2 = "/Assets/Game_Page/Bubble (Enabled).png";
+
+    const img2 = new Image();
+
+    const promise2 = new Promise((resolve, reject) => {
+        img2.onload = () => {
+            imageCache.set(src2, img2);
+            resolve();
+        };
+        img2.onerror = reject;
+    });
+
+    img2.src = src2;
+    promises.push(promise2);
+
+    await Promise.all(promises);
 }
