@@ -19,13 +19,46 @@
     height: 100vh;
 }
 
+.headerL {
+    position: fixed;
+    top: 0;
+    left: 5%;
+    width: 10%;      
+    background: url("/Assets/Game_Page/Game/Upper_Rect_Background_L.png");
+    background-position: center; 
+    background-repeat: no-repeat;
+    height: 120px;
+    z-index: 1;
+}
+.headerM {
+    position: fixed;
+    top: 0;
+    left: 5%;
+    width: 70%;      
+    background: url("/Assets/Game_Page/Game/Upper_Rect_Background_M.png");
+    background-position: center; 
+    height: 120px;
+    z-index: 1;
+}
+.headerR {
+    position: fixed;
+    top: 0;
+    left: 85%;
+    width: 10%;      
+    background: url("/Assets/Game_Page/Game/Upper_Rect_Background_R.png");
+    background-position: center; 
+    background-repeat: no-repeat;
+    height: 120px;
+    z-index: 1;
+}
+
 /* Sand on bottom of the screen */
 .sand {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;      
-    background: url("/Assets/Game_Page/Sand\ \(Bottom\).png");
+    background: url("/Assets/Game_Page/Game/Sand.png");
     height: 144px;
     z-index: 1;
 }

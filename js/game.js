@@ -186,7 +186,7 @@ export class Game{
     }
 
     create_bubbles() {
-        const src = "/Assets/Game_Page/Bubble (Disabled).png";
+        const src = "/Assets/Game_Page/Game/Deselected_Individual_Bubble.png";
         const size = 25;
 
         const imgTemplate = imageCache.get(src);
@@ -307,7 +307,7 @@ export class Game{
             this.max_streak = Math.max(this.streak, this.max_streak);
             this.calculate_points(this.rounds[this.current_round].reaction_time);
             canvas.style.border = "5px solid green";
-            document.getElementById(`bubble_${this.current_round}`).src = "/Assets/Game_Page/Bubble (Enabled).png"
+            document.getElementById(`bubble_${this.current_round}`).src = "/Assets/Game_Page/Game/Filled_Individual_Bubble.png"
         } else {
             //incorrect shape chosen
             this.rounds[this.current_round].correct = false;
@@ -431,7 +431,7 @@ export async function preloadImages() {
         }
     }
 
-    const src = "/Assets/Game_Page/Bubble (Disabled).png";
+    const src = "/Assets/Game_Page/Game/Deselected_Individual_Bubble.png";
 
     const img = new Image();
 
@@ -446,7 +446,7 @@ export async function preloadImages() {
     img.src = src;
     promises.push(promise);
 
-    const src2 = "/Assets/Game_Page/Bubble (Enabled).png";
+    const src2 = "/Assets/Game_Page/Game/Filled_Individual_Bubble.png";
 
     const img2 = new Image();
 
