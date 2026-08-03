@@ -173,7 +173,7 @@ export class Game{
      * @param {Integer} streak
      * @param {Integer} max_streak
      */
-    constructor(rounds = [], current_round = 0, max_rounds = 20, num_shapes = 5, num_correct = 0, num_wrong = 0, streak = 0, max_streak = 0, points = 0){
+    constructor(rounds = [], current_round = 0, max_rounds = 20, num_shapes = 5, num_correct = 0, num_wrong = 0, streak = 0, max_streak = 0, points = 0, num_bubbles = 0){
         this.rounds = rounds;
         this.current_round = current_round;
         this.max_rounds = max_rounds;
@@ -183,9 +183,14 @@ export class Game{
         this.streak = streak;
         this.max_streak = max_streak;
         this.points = points;
+        this.num_bubbles = num_bubbles;
     }
 
-    create_bubbles() {
+    create_bubbles(num) {
+        if (num <= 0){
+            return;
+        }
+        console.log(`creating ${num} bubbles`);
         const src = "/Assets/Game_Page/Game/Deselected_Individual_Bubble.png";
         const size = 25;
 
@@ -199,19 +204,20 @@ export class Game{
         let c = document.getElementById("canvasContainer");
         let canvas_rect = c.getBoundingClientRect();
 
-        for (let i = 0; i < this.max_rounds; i++){
+        for (let i = 0; i < num; i++){
             const img = imgTemplate.cloneNode(true);
 
-            img.id = `bubble_${i}`;
+            img.id = `bubble_${this.num_bubbles}`;
             img.classList.add("bubble");
 
             img.style.position = "fixed";
             img.style.width = `${size}px`;
             img.style.height = "auto";
-            img.style.left = `${canvas_rect.left + 25 + ((i % 10) * 40)}px`;
-            img.style.top = `${canvas_rect.bottom + 15 + (40 * Math.trunc(i/10))}px`;
+            img.style.left = `${canvas_rect.left + 25 + ((this.num_bubbles % 10) * 40)}px`;
+            img.style.top = `${canvas_rect.bottom + 15 + (40 * Math.trunc(this.num_bubbles/10))}px`;
 
             document.getElementById("gameBackground").appendChild(img);
+            this.num_bubbles++;
 
         }
     }
@@ -307,6 +313,10 @@ export class Game{
             this.max_streak = Math.max(this.streak, this.max_streak);
             this.calculate_points(this.rounds[this.current_round].reaction_time);
             canvas.style.border = "5px solid green";
+            if (this.num_bubbles < (this.current_round + 1)){
+                this.create_bubbles(1);
+            }
+            console.log(`bubble_${this.current_round}`);
             document.getElementById(`bubble_${this.current_round}`).src = "/Assets/Game_Page/Game/Filled_Individual_Bubble.png"
         } else {
             //incorrect shape chosen
@@ -320,7 +330,7 @@ export class Game{
     }
 
     async start_game(){
-        this.create_bubbles();
+        this.create_bubbles(this.max_rounds);
         while ((this.current_round < this.max_rounds) || this.max_rounds === -1) {
             this.new_round();
             await this.start_round();

@@ -59,15 +59,15 @@
     <img src="/Assets/Game_Page/Game/Goldfish.png" class="goldfish_R">
 </div>
 
-<div id="resultsScreen" hidden>
-    <h1>Level Completed</h1>
+<div id="resultsScreen" class="resultsScreen" hidden>
+    <div class="background_tint"></div>
+    <img src="/Assets/Game_Page/Round_Complete/Round Complete UI.png" class="round_complete">
 
-    <p>Correct: <span id="correct"></span></p>
-    <p>Accuracy: <span id="accuracy"></span></p>
-    <p>Best Streak: <span id="bestStreak"></span></p>
-    <p>Average reaction: <span id="avgTime"></span> ms</p>
 </div>
 
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="/js/supabaseClient.js"></script>
 <script type="module" src="/js/standard.js"></script>
 
 </html>

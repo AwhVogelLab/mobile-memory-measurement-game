@@ -72,17 +72,17 @@ async function start_game(num) {
 }
 
 function end_screen(game) {
-    document.getElementById("gameLayout").hidden = true;
-    document.getElementById("gameLayout").style.display = "none";
+    // document.getElementById("gameLayout").hidden = true;
+    // document.getElementById("gameLayout").style.display = "none";
     // document.getElementById("canvasContainer").hidden = true;
     // document.getElementById("infoPanel").hidden = true;
 
     document.getElementById("resultsScreen").hidden = false;
 
-    document.getElementById("bestStreak").textContent = game.max_streak;
+    // document.getElementById("bestStreak").textContent = game.max_streak;
 
-    document.getElementById("avgTime").textContent =
-        game.averageReactionTime().toFixed(0);
+    // document.getElementById("avgTime").textContent =
+        // game.averageReactionTime().toFixed(0);
 }
 
 async function loadSound(name, url) {

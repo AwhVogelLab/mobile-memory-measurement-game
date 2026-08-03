@@ -132,3 +132,23 @@
     justify-content: center;
     align-items: center; 
 }
+
+.background_tint {
+    position: absolute;
+    inset: 0;
+    background-image: url("/Assets/Game_Page/Round_Complete/Background\ Tint\ \(Round\ Complete\).png");
+    background-position: center; 
+    background-repeat: repeat;
+    background-attachment: fixed; 
+    z-index: 11;
+}
+
+.round_complete {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 80%;
+    width: auto;      
+    z-index: 12;
+}
