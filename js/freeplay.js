@@ -67,8 +67,6 @@ async function start_game(num) {
 
     console.log(game);
 
-    game.delete_bubbles();
-
     end_screen(game);
 
 }

@@ -215,7 +215,7 @@ export class Game{
             img.style.position = "fixed";
             img.style.width = `${size}px`;
             img.style.height = "auto";
-            img.style.left = `${canvas_rect.left + 25 + ((this.num_bubbles % 10) * 40)}px`;
+            img.style.left = `${canvas_rect.left + canvas.width/20 + ((this.num_bubbles % 10) * canvas.width/10)}px`;
             img.style.top = `${canvas_rect.bottom + 15 + (40 * Math.trunc(this.num_bubbles/10))}px`;
 
             document.getElementById("gameBackground").appendChild(img);
