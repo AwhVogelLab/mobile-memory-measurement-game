@@ -67,6 +67,8 @@ async function start_game(num) {
 
     console.log(game);
 
+    game.delete_bubbles();
+
     end_screen(game);
 
 }
@@ -79,10 +81,11 @@ function end_screen(game) {
 
     document.getElementById("resultsScreen").hidden = false;
 
-    // document.getElementById("bestStreak").textContent = game.max_streak;
+    document.getElementById("result_correct").textContent = `Correct: ${game.num_correct}/${game.num_correct+game.num_wrong}`;
 
-    // document.getElementById("avgTime").textContent =
-        // game.averageReactionTime().toFixed(0);
+    document.getElementById("result_streak").textContent = `Max Streak: ${game.max_streak}`;
+
+    document.getElementById("result_score").textContent = `Points: ${game.points}`;
 }
 
 async function loadSound(name, url) {
@@ -131,5 +134,11 @@ function createSlider(min, max, start, step, num, func, labelText){
 }
 
 window.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("play_again").addEventListener("click", () => {
+        document.getElementById("resultsScreen").hidden = true;
+
+        canvas.style.border = "5px solid #b8c1ec";
+        create_start_button();
+    });
     setup();
 });

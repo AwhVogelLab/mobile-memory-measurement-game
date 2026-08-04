@@ -172,6 +172,8 @@ export class Game{
      * @param {Integer} num_wrong
      * @param {Integer} streak
      * @param {Integer} max_streak
+     * @param {Integer} points
+     * @param {Integer} num_bubbles
      */
     constructor(rounds = [], current_round = 0, max_rounds = 20, num_shapes = 5, num_correct = 0, num_wrong = 0, streak = 0, max_streak = 0, points = 0, num_bubbles = 0){
         this.rounds = rounds;
@@ -220,6 +222,16 @@ export class Game{
             this.num_bubbles++;
 
         }
+    }
+
+    delete_bubbles() {
+        const bubbles = document.querySelectorAll(".bubble");
+
+        bubbles.forEach((bubble) => {
+            bubble.remove();
+        });
+
+        this.num_bubbles = 0;
     }
 
     generate_shapes() {
@@ -329,7 +341,43 @@ export class Game{
         this.rounds[this.current_round].clear_buttons();
     }
 
+    async countdown(){
+        const container = document.getElementById("canvasContainer");
+
+        const text = document.createElement("div");
+        text.style.position = "absolute";
+        text.style.top = "50%";
+        text.style.left = "50%";
+        text.style.transform = "translate(-50%, -50%)";
+        text.style.fontSize = "120px";
+        text.style.fontWeight = "bold";
+        text.style.color = "white";
+        text.style.zIndex = "20";
+        text.style.pointerEvents = "none";
+
+        container.appendChild(text);
+
+        return new Promise((resolve) => {
+            let count = 3;
+
+            text.textContent = count;
+
+            const interval = setInterval(() => {
+                count--;
+
+                if (count > 0) {
+                    text.textContent = count;
+                } else {
+                    text.remove();
+                    clearInterval(interval);
+                    resolve();
+                }
+            }, 800);
+        });
+    }
+
     async start_game(){
+        await this.countdown();
         this.create_bubbles(this.max_rounds);
         while ((this.current_round < this.max_rounds) || this.max_rounds === -1) {
             this.new_round();
@@ -347,6 +395,7 @@ export class Game{
             await sleep(200);
         }
 
+        this.delete_bubbles();
         return this;
     }
 

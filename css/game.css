@@ -152,3 +152,58 @@
     width: auto;      
     z-index: 12;
 }
+
+.round_complete img {
+    display: block;
+    height: 100%;
+    width: auto;
+}
+
+.result_correct {
+    position: absolute;
+    top: 52%;
+    left: 20%;
+}
+
+.result_streak {
+    position: absolute;
+    top: 57%;
+    left: 20%;
+}
+
+.result_score {
+    position: absolute;
+    top: 62%;
+    left: 20%;
+}
+
+.result_correct,
+.result_streak,
+.result_score {
+    color: white;
+    font-size: 36px;
+
+    text-shadow:
+        -2px -2px 0 #25648e,
+         2px -2px 0 #25648e,
+        -2px  2px 0 #25648e,
+         2px  2px 0 #25648e;
+}
+
+.result_button {
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    z-index: 13;
+}
+
+.result_button img {
+    height: 80px;
+    width: auto;
+}

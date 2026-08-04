@@ -11,6 +11,18 @@ body {
     flex-direction: column;
 }
 
+/*Font*/
+@font-face {
+    font-family: "GameFont";
+    src: url("/Assets/ThaleahFat.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: "GameFont", sans-serif;
+}
+
 /*header to change tabs*/
 nav {
     background-color: #333;
