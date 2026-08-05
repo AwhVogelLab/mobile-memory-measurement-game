@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <head>
     <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/home.css">
 </head>
 
 <body>
@@ -16,10 +18,59 @@
         });
 </script>
 
-    <h1>Home.</h1>
-    <p>Test home page</p>
+    <!-- <h1>Home.</h1>
+    <p>Test home page</p> -->
+ 
+
+
+<div id ="home_top" class = "home_top">
+    <div id="level_bar" class = "level_bar">
+        <img src="/Assets/Home_Page/Level PFP.png" class="pfp">
+        <p> LEVEL: </p>
+        <img src="/Assets/Home_Page/Level Rectangle.png" class="lvl_bar_background">
+    </div>
+    
+    <img src="/Assets/Home_Page/Bubbles Home Page.png" class="bubbles">
+    
+    <div id="side_menus" class = "side_menus">
+        <img src="Assets/Home_Page/Profile Icon.png" class="profile_icon">
+        <img src="Assets/Home_Page/Menu Select button.png" class="menu_icon">
+    </div>
+        
+    <div id = "play_and_goldfish" class = "play_and_goldfish">
+        <img src = "/Assets/Home_Page/Continue Playing Button.png" class="play_button">
+        <img src = "Assets/Game_Page/Game/Goldfish.png" class="goldfish">
+    </div>
+</div>
+
+
+<div id="home_bottom" class="home_bottom">
+    <img src="/Assets/Home_Page/Home Page Sandy Background.png" class="base_sand" alt = "base background color">
+
+    <div id="home_bottom_stats" class = "home_bottom_stats"> <!--images that will be overlayed atop base_sand-->
+        
+        <div id="dailies" class ="dailies">
+            <img src="/Assets/Home_Page/Daily Tasks Background.png" class="dailies_box">
+
+            <div id="daily_bars" class="daily_bars">
+                <img src="/Assets/Home_Page/Claim Daily (Empty).png" class="daily1">
+                <img src="/Assets/Home_Page/Claim Daily (Empty).png" class="daily2">
+            </div>            
+        </div>
+        
+
+        <div id ="login_and_shapes" class = "login_and_shapes">
+            <img src="/Assets/Home_Page/Login Streak Bubble Icon.png" class="login_streak_box">
+            <img src="/Assets/Home_Page/Most Shapes Correct Icon.png" class="shapes_correct_box"> 
+        </div>
+    </div> 
+</div>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="/js/supabaseClient.js"></script>
+
+
 </body>
 </html>

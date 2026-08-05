@@ -1,0 +1,164 @@
+body {
+  margin: 0;
+  padding: 0; 
+}
+
+.home_top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.level_bar {
+    margin-left: -130px;
+    margin-top: 75px;
+    position: relative;
+    width: 200px;   
+    height: 80px;
+}
+.lvl_bar_background {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  width: 150px;    
+  height: 35px;
+  z-index: 1;
+}
+.pfp {
+  position: absolute;
+  top: -8px;
+  left: 10px;      
+  width: 50px;    
+  z-index: 2;    
+}
+p {
+  position: absolute;
+  top: 16%;
+  left: 65px;     
+  transform: translateY(-50%);
+  margin: 0;
+  z-index: 3;    
+  color: black;   
+}
+
+
+
+.bubbles {
+    margin-top: -80px;
+    margin-left: 80px;
+    width: 70px;
+    /* height: 100px; */
+}
+
+.side_menus {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: -120px;
+    margin-left: 250px
+}
+.profile_icon {
+    width: 65px;
+}
+.menu_icon {
+    width: 65px;
+    margin-top: 20px;
+}
+
+
+
+.play_and_goldfish { /*container*/
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 390px;
+}
+.play_button {
+    width: 175px;
+    z-index: 2; 
+    position: relative;
+}
+.goldfish {
+    width: 175px;
+    z-index: 1;
+    margin-left: -40px; 
+}
+
+
+
+
+.home_bottom { /*container*/
+    position: fixed; 
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50vh; /*exists in bottom half of the screen*/
+}
+
+.home_bottom_stats { /*container*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    gap: 16px; 
+    width: 100%;
+    height: 100%;
+}
+
+.base_sand {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.dailies{
+    position: relative;
+}
+.dailies_box {
+    width: 315px;
+    display: block;
+    z-index: 1;
+}
+
+.daily1 {
+    position: absolute;
+    top: 28%;
+    left: 5%;
+    width: 260px;
+}
+.daily2 {
+    position: absolute;
+    top: 63%;
+    left: 5%;
+    width: 260px;
+}
+
+
+
+.login_and_shapes { /*container*/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 16px; 
+}
+.login_streak_box{
+    width: 150px; 
+    z-index: 1;
+}
+.shapes_correct_box {
+    width: 150px; 
+    z-index: 1;
+}
