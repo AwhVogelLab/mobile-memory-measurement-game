@@ -4,10 +4,11 @@ body {
 }
 
 .home_top {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -52,13 +53,13 @@ p {
 }
 
 .side_menus {
-    position: relative;
+    position: absolute;
+    top: 75px;      
+    right: 0;    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: -86px;
-    margin-left: 250px
 }
 .profile_icon {
     width: 65px;
@@ -116,7 +117,7 @@ p {
   top: 0;
   left: 0;
   width: 100%;
-  height: 50hv;
+  height: 50vh;
   object-fit: contain;
   object-position: center;
   z-index: 0;
