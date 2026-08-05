@@ -64,25 +64,27 @@ async function start_game() {
 }
 
 function end_screen(game) {
-    document.getElementById("gameLayout").hidden = true;
-    document.getElementById("gameLayout").style.display = "none";
+    // document.getElementById("gameLayout").hidden = true;
+    // document.getElementById("gameLayout").style.display = "none";
     // document.getElementById("canvasContainer").hidden = true;
     // document.getElementById("infoPanel").hidden = true;
 
     document.getElementById("resultsScreen").hidden = false;
 
-    document.getElementById("correct").textContent = `${game.num_correct}/${game.num_correct+game.num_wrong}`;
+    document.getElementById("result_correct").textContent = `Correct: ${game.num_correct}/${game.num_correct+game.num_wrong}`;
 
-    document.getElementById("bestStreak").textContent = game.max_streak;
+    document.getElementById("result_streak").textContent = `Max Streak: ${game.max_streak}`;
 
-    const accuracy =
-        100 * game.num_correct / (game.num_correct + game.num_wrong);
+    document.getElementById("result_score").textContent = `Points: ${game.points}`;
 
-    document.getElementById("accuracy").textContent =
-        accuracy.toFixed(1) + "%";
+    // const accuracy =
+    //     100 * game.num_correct / (game.num_correct + game.num_wrong);
 
-    document.getElementById("avgTime").textContent =
-        game.averageReactionTime().toFixed(0);
+    // document.getElementById("accuracy").textContent =
+    //     accuracy.toFixed(1) + "%";
+
+    // document.getElementById("avgTime").textContent =
+    //     game.averageReactionTime().toFixed(0);
 }
 
 async function loadSound(name, url) {
@@ -133,5 +135,11 @@ function createSlider(min, max, start, step, num, func, labelText){
 }
 
 window.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("play_again").addEventListener("click", () => {
+        document.getElementById("resultsScreen").hidden = true;
+
+        canvas.style.border = "5px solid #b8c1ec";
+        create_start_button();
+    });
     setup();
 });
