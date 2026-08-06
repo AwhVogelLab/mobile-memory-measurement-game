@@ -33,5 +33,5 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
 
     await createPlayerRow(user.id, email); // using email as display_name for now
 
-    window.location.href = "../play/index.html"; // adjust to wherever standard/freeplay actually lives
+    window.location.href = "/play/index.html";
 });
