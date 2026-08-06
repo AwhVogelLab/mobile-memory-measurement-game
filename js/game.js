@@ -13,6 +13,8 @@ import {
     distance
 } from "./globals.js";
 
+import { supabase } from "./SupabaseClient.js";
+
 //shape object
 export class Shape_obj{
 
@@ -339,7 +341,90 @@ export class Game{
             canvas.style.border = "5px solid red";
         }
         this.rounds[this.current_round].clear_buttons();
+        await this.save_trial_db(clicked_shape);
     }
+
+    async start_session_db(player_id, game_version = "v1", difficulty = 1) {
+    const { data, error } = await supabase
+        .from("sessions")
+        .insert({
+            player_id: player_id,
+            game_version: game_version,
+            difficulty: difficulty,
+            started_at: new Date().toISOString(),
+        })
+        .select();
+
+    if (error) {
+        console.error("Starting session failed:", error.message);
+        return;
+    }
+
+    this.session_id = data[0].session_id;
+}
+
+async save_trial_db(clicked_shape){
+    const round = this.rounds[this.current_round];
+
+    const { data, error } = await supabase
+        .from("trials")
+        .insert({
+            session_id: this.session_id,
+            trial_index: this.current_round + 1,
+            presented_at: new Date().toISOString(),
+            reaction_time_ms: Math.round(round.reaction_time),
+            is_correct: round.correct,
+            change_type: round.changed_attribute,
+        })
+        .select();
+
+    if (error) {
+        console.error("Saving trial failed:", error.message);
+        return;
+    }
+
+    const trial_id = data[0].trial_id;
+
+    const rows = round.shapes.map((shape, i) => ({
+        trial_id: trial_id,
+        slot_index: i,
+        shape: shape.shape,
+        color_hex: shape.color,
+        original_shape: shape === round.shape_changed ? shape.prev_shape : null,
+        original_color_hex: shape === round.shape_changed ? shape.prev_color : null,
+        is_target: shape === round.shape_changed,
+        was_selected: shape === clicked_shape,
+    }));
+
+    const { data: objectRows, error: objectsError } = await supabase
+        .from("trial_objects")
+        .insert(rows)
+        .select();
+
+    if (objectsError) {
+        console.error("Saving trial objects failed:", objectsError.message);
+        return;
+    }
+
+    const selectedRow = objectRows.find(row => row.was_selected);
+    if (selectedRow) {
+        await supabase
+            .from("trials")
+            .update({ selected_object_id: selectedRow.object_id })
+            .eq("trial_id", trial_id);
+    }
+}
+
+async end_session_db(){
+    if (!this.session_id) return;
+
+    const { error } = await supabase
+        .from("sessions")
+        .update({ ended_at: new Date().toISOString() })
+        .eq("session_id", this.session_id);
+
+    if (error) console.error("Ending session failed:", error.message);
+}
 
     async countdown(){
         const container = document.getElementById("canvasContainer");
@@ -376,7 +461,8 @@ export class Game{
         });
     }
 
-    async start_game(){
+    async start_game(player_id, game_version = "v1", difficulty = 1){
+        await this.start_session_db(player_id, game_version, difficulty);
         await this.countdown();
         this.create_bubbles(this.max_rounds);
         while ((this.current_round < this.max_rounds) || this.max_rounds === -1) {
@@ -395,6 +481,7 @@ export class Game{
             await sleep(200);
         }
 
+        await this.end_session_db();
         this.delete_bubbles();
         return this;
     }
@@ -422,6 +509,7 @@ export class Game{
         });
         
     }
+
 
     getAccuracyColor(pct) {
         // red → yellow → green
