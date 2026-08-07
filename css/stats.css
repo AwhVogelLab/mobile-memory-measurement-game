@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  padding: 20; 
+}
+
+
+
+.stats_title {
+    width: 50%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+}
+
+.weekly_login_streaks { /*container*/
+    position: relative;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+}
+
+.weekly_login_streak_background {
+    width: 95%;
+    height: auto; 
+    margin-top: 3%;
+}
+
+.all_daily_logins { /*container of all dailies*/
+    position: absolute;
+    top: 25%;
+    margin-left: 3%;
+    left: 2%;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+}
+
+.daily_login_box_1,
+.daily_login_box_2, 
+.daily_login_box_3,
+.daily_login_box_4, 
+.daily_login_box_5,
+.daily_login_box_6,
+.daily_login_box_7 { /*container of FIRST daily box*/
+    position: relative;
+    width: 10%; 
+    
+}
+.daily_login_box_1 h2,
+.daily_login_box_2 h2, 
+.daily_login_box_3 h2,
+.daily_login_box_4 h2, 
+.daily_login_box_5 h2,
+.daily_login_box_6 h2,
+.daily_login_box_7 h2 {
+    position: absolute; 
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -100%);
+    margin: 0; 
+}
+.daily_goldfish {  
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+.daily_login_background {
+    /* border: 1px solid black; */
+    width: 100%;
+    display: block;
+}
+
+
+.mascot {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+
+.sandy_background {
+    position: relative; 
+    width: 100%;
+    height: 50vh;
+}
