@@ -18,6 +18,6 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     const user = await logIn(email, password);
 
     if (user) {
-        window.location.href = "/index.html";
+        window.location.href = "/index.html"; // adjust to match signup.js's redirect
     }
 });

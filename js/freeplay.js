@@ -63,8 +63,15 @@ function create_start_button() {
 }
 
 async function start_game(num) {
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+    
+    if (userError || !userData?.user) {
+        console.error("No logged-in user found:", userError?.message);
+        return;
+    }
+    
     const game = new Game([], 0, -1, num);
-    await game.start_game(await game.start_game(userData.user.id, "standard"););
+    await game.start_game(userData.user.id, "standard");
 
     console.log(game);
 
