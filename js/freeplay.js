@@ -71,7 +71,7 @@ async function start_game(num) {
     }
     
     const game = new Game([], 0, -1, num);
-    await game.start_game(userData.user.id, "standard");
+    await game.start_game(userData.user.id, "freeplay", num);
 
     console.log(game);
 

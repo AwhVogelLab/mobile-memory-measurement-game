@@ -63,7 +63,7 @@ async function start_game() {
     }
 
     const game = new Game();
-    await game.start_game(userData.user.id, "standard");
+    await game.start_game(userData.user.id, "standard", 1);
 
     console.log(game);
 

@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  padding: 20; 
+  padding: 20;
 }
 
 
@@ -13,19 +13,19 @@ body {
     margin-top: 10%;
 }
 
-.weekly_login_streaks { /*container*/
+.weekly_login_streaks { /*container of whole daily login background + all the dailies*/
     position: relative;
     display: flex;
-    justify-content: center; /* Centers horizontally */
+    justify-content: center;
 }
 
 .weekly_login_streak_background {
     width: 95%;
-    height: auto; 
+    height: auto;
     margin-top: 3%;
 }
 
-.all_daily_logins { /*container of all dailies*/
+.all_daily_logins { /*container of all daily background + text*/
     position: absolute;
     top: 25%;
     margin-left: 3%;
@@ -37,37 +37,36 @@ body {
 }
 
 .daily_login_box_1,
-.daily_login_box_2, 
+.daily_login_box_2,
 .daily_login_box_3,
-.daily_login_box_4, 
+.daily_login_box_4,
 .daily_login_box_5,
 .daily_login_box_6,
-.daily_login_box_7 { /*container of FIRST daily box*/
+.daily_login_box_7 { /*settings of container of each daily box*/
     position: relative;
-    width: 10%; 
-    
+    width: 10%;
+
 }
 .daily_login_box_1 h2,
-.daily_login_box_2 h2, 
+.daily_login_box_2 h2,
 .daily_login_box_3 h2,
-.daily_login_box_4 h2, 
+.daily_login_box_4 h2,
 .daily_login_box_5 h2,
 .daily_login_box_6 h2,
 .daily_login_box_7 h2 {
-    position: absolute; 
+    position: absolute;
     top:50%;
     left:50%;
     transform: translate(-50%, -100%);
-    margin: 0; 
+    margin: 0;
 }
-.daily_goldfish {  
+.daily_goldfish {  /*tiny goldfish for activated daily boxes*/
     position: absolute;
     width: 100%;
     top: 0;
     left: 0;
 }
 .daily_login_background {
-    /* border: 1px solid black; */
     width: 100%;
     display: block;
 }
@@ -81,8 +80,89 @@ body {
 }
 
 
+
+
+
+.stat_displays { /*container of everything in stats; basically bottom 1/2 of screen*/
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
 .sandy_background {
-    position: relative; 
+    position: relative;
     width: 100%;
-    height: 50vh;
+    height: 100%;
+}
+
+
+.stat_columns { /*container of all the stat_rows*/
+    position: absolute;
+    top: 21%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.stat_row_1,
+.stat_row_2,
+.stat_row_4 { /*positioning of each row based on sandy-background*/
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+    justify-content: center;
+}
+
+.small_stats_box { /*positioning and sizing of each smaller stat box*/
+    position: relative;
+    width: 160px;
+    height: 165px;
+    flex-shrink: 0;
+}
+
+.small_bubble_background { /*for the background of small_stats_box*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+}
+
+.bubble_elements { /*container of text elements in a bubble box*/
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.streak_start_date { /*subheading under title of small_stats_box*/
+    position: relative;
+    top: 25%;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    margin-right: 15%;
+}
+
+.stat_text { /*alignment for big stat at bottom of stat boxes*/
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 10%;
+    margin-top: 45%;
+    gap: 10px;
+    z-index: 1;
+}
+
+.best_shape { /*setting width of the best_shape img*/
+    width: 50px;
 }
