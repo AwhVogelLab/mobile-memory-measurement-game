@@ -164,5 +164,9 @@ body {
 }
 
 .best_shape { /*setting width of the best_shape img*/
-    width: 50px;
+    max-width: 50px;
+    max-height: 50px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
 }

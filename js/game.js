@@ -344,7 +344,7 @@ export class Game{
         await this.save_trial_db(clicked_shape);
     }
 
-    async start_session_db(player_id, game_version = "v1", difficulty = 1) {
+async start_session_db(player_id, game_version = "v1", difficulty = 1) {
     const { data, error } = await supabase
         .from("sessions")
         .insert({
@@ -361,6 +361,7 @@ export class Game{
     }
 
     this.session_id = data[0].session_id;
+    this.player_id = player_id;
 }
 
 async save_trial_db(clicked_shape){
@@ -420,10 +421,22 @@ async end_session_db(){
 
     const { error } = await supabase
         .from("sessions")
-        .update({ ended_at: new Date().toISOString() })
+        .update({
+            ended_at: new Date().toISOString(),
+            final_points: this.points,
+            max_streak: this.max_streak,
+            num_correct: this.num_correct,
+            num_wrong: this.num_wrong,
+        })
         .eq("session_id", this.session_id);
 
     if (error) console.error("Ending session failed:", error.message);
+
+    const { error: streakError } = await supabase.rpc("update_player_streak", {
+        p_player_id: this.player_id,
+    });
+
+    if (streakError) console.error("Updating streak failed:", streakError.message);
 }
 
     async countdown(){
