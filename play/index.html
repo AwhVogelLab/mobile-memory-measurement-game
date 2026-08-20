@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<head>
+    <title>Play</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div id="header"></div>
+
+    <script>
+        fetch("/header.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("header").innerHTML = data;
+            });
+    </script>
+    
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script type="module" src="/js/SupabaseClient.js"></script>
+<script type="module" src="/js/play.js"></script>
+</body>

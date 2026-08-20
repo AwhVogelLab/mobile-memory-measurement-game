@@ -23,7 +23,9 @@ async function setup() {
     await loadSound("correct", "/audio/correct_answer2.mp3");
     await loadSound("incorrect", "/audio/incorrect_answer.mp3");
 
-    create_start_button();
+    settings_screen();
+
+    // create_start_button();
     
 }
 
@@ -54,7 +56,7 @@ function create_start_button() {
     container.appendChild(btn);
 }
 
-async function start_game() {
+async function start_game(rounds, shapes) {
     const { data: userData, error: userError } = await supabase.auth.getUser();
     
     if (userError || !userData?.user) {
@@ -62,13 +64,66 @@ async function start_game() {
         return;
     }
 
-    const game = new Game();
+    const game = new Game([], 0, rounds, shapes);
     await game.start_game(userData.user.id, "standard", 1);
 
     console.log(game);
 
     end_screen(game);
 
+}
+
+async function settings_screen() {
+    document.getElementById("gameSettings").hidden = false;
+
+    const four_button = document.getElementById("four_button");
+    const five_button = document.getElementById("five_button");
+    const six_button = document.getElementById("six_button");
+
+
+    const add_button = document.getElementById("add_button");
+    const subtract_button = document.getElementById("subtract_button");
+    const play_button = document.getElementById("play_button");
+
+    let rounds = 20;
+    let shapes = 5;
+
+    document.getElementById("numRounds").textContent = `${rounds}`;
+
+    four_button.addEventListener('click', () => {
+        shapes = 4;
+    });
+    five_button.addEventListener('click', () => {
+        shapes = 5;
+    });
+    six_button.addEventListener('click', () => {
+        shapes = 6;
+    });
+
+
+    add_button.addEventListener('click', () => {
+        if (rounds < 100){
+            rounds += 1;
+        }
+        document.getElementById("numRounds").textContent = `${rounds}`;
+    });
+
+    subtract_button.addEventListener('click', () => {
+        if (rounds > 1){
+            rounds -= 1;
+        }
+        document.getElementById("numRounds").textContent = `${rounds}`;
+    });
+
+    play_button.addEventListener('click', () => {
+        start_game(rounds, shapes);        
+        let divsToHide = document.getElementsByClassName("instructions");
+        for (let v = 0; v<divsToHide.length; v++){
+            divsToHide[v].hidden = true;
+        }
+        document.getElementById("gameSettings").hidden = true;
+        
+    });
 }
 
 function end_screen(game) {
@@ -147,7 +202,7 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("resultsScreen").hidden = true;
 
         canvas.style.border = "5px solid #b8c1ec";
-        create_start_button();
+        settings_screen();
     });
     setup();
 });

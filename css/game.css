@@ -145,7 +145,7 @@
 
 .round_complete {
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     height: 80%;
@@ -179,7 +179,8 @@
 
 .result_correct,
 .result_streak,
-.result_score {
+.result_score,
+.numRounds {
     color: white;
     font-size: 36px;
 
@@ -206,4 +207,113 @@
 .result_button img {
     height: 80px;
     width: auto;
+}
+
+.gameSettings {
+    justify-content: center;
+    align-items: center; 
+}
+
+.new_game {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 80%;
+    width: auto;      
+    z-index: 12;
+}
+
+.new_game img {
+    display: block;
+    height: 100%;
+    width: auto;
+}
+
+.six_button {
+    position: absolute;
+    height: 50px;
+    width: auto;
+    top: 57%;
+    left: 65%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.four_button {
+    position: absolute;
+    height: 50px;
+    width: auto;
+    top: 57%;
+    left: 18%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.five_button {
+    position: absolute;
+    height: 50px;
+    width: auto;
+    top: 57%;
+    left: 41.5%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.six_button span,
+.five_button span,
+.four_button span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: 1px 1px 4px black;
+}
+
+.add_button {
+    position: absolute;
+    height: 50px;
+    width: auto;
+    top: 70%;
+    left: 65%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.subtract_button {
+    position: absolute;
+    height: 50px;
+    width: auto;
+    top: 70%;
+    left: 18%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.numRounds {
+    position: absolute;
+    height: 50px;
+    width: auto;
+    top: 71.5%;
+    left: 45%;
+    text-align: center;
+}
+
+.play_button {
+    position: absolute;
+    height: 100px;
+    width: auto;
+    top: 81%;
+    left: 13%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
 }

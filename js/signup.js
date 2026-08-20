@@ -3,6 +3,11 @@ import { supabase } from "./SupabaseClient.js";
 async function signUp(email, password) {
   const { data, error } = await supabase.auth.signUp({ email, password });
   if (error) {
+    const errorMessage = document.getElementById("signupError");
+    if (errorMessage) {
+        errorMessage.style.display = "block";
+        errorMessage.textContent = error.message;
+    }
     console.error("Sign up failed:", error.message);
     return null;
   }
@@ -18,6 +23,7 @@ async function createPlayerRow(userId, displayName) {
     console.error("Creating player row failed:", error.message);
     return null;
   }
+  
   return data[0];
 }
 

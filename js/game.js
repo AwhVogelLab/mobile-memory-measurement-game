@@ -331,7 +331,7 @@ export class Game{
                 this.create_bubbles(1);
             }
             console.log(`bubble_${this.current_round}`);
-            document.getElementById(`bubble_${this.current_round}`).src = "/Assets/Game_Page/Game/Filled_Individual_Bubble.png"
+            document.getElementById(`bubble_${this.current_round}`).src = "/Assets/Game_Page/Game/New_Correct_Bubble.png"
         } else {
             //incorrect shape chosen
             this.rounds[this.current_round].correct = false;
@@ -339,6 +339,7 @@ export class Game{
             this.streak = 0;
             playSound("incorrect", 0.5);
             canvas.style.border = "5px solid red";
+            document.getElementById(`bubble_${this.current_round}`).src = "/Assets/Game_Page/Game/New_Incorrect_Bubble.png"
         }
         this.rounds[this.current_round].clear_buttons();
         await this.save_trial_db(clicked_shape);
@@ -606,7 +607,7 @@ export async function preloadImages() {
     img.src = src;
     promises.push(promise);
 
-    const src2 = "/Assets/Game_Page/Game/Filled_Individual_Bubble.png";
+    const src2 = "/Assets/Game_Page/Game/New_Correct_Bubble.png";
 
     const img2 = new Image();
 
