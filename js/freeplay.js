@@ -23,7 +23,9 @@ async function setup() {
     await loadSound("correct", "/audio/correct_answer2.mp3");
     await loadSound("incorrect", "/audio/incorrect_answer.mp3");
 
-    create_start_button();
+    settings_screen();
+
+    // create_start_button();
     
 }
 
@@ -80,6 +82,57 @@ async function start_game(num) {
 
     end_screen(game);
 
+}
+
+
+async function settings_screen() {
+    document.getElementById("gameSettings").hidden = false;
+
+    const four_button = document.getElementById("four_button");
+    const five_button = document.getElementById("five_button");
+    const six_button = document.getElementById("six_button");
+
+    const play_button = document.getElementById("play_button");
+
+    let shapes = 5;
+
+    four_button.addEventListener('click', () => {
+        four_button.querySelector("img").src = 
+            "/Assets/Game Settings/4 Shapes Button (Green).png";
+        five_button.querySelector("img").src = 
+            "/Assets/Game Settings/5 Shapes Button.png";
+        six_button.querySelector("img").src = 
+            "/Assets/Game Settings/6 Shapes Button.png";
+        shapes = 4;
+    });
+    five_button.addEventListener('click', () => {
+        four_button.querySelector("img").src = 
+            "/Assets/Game Settings/4 Shapes Button.png";
+        five_button.querySelector("img").src = 
+            "/Assets/Game Settings/5 Shapes Button (Green).png";
+        six_button.querySelector("img").src = 
+            "/Assets/Game Settings/6 Shapes Button.png";
+        shapes = 5;
+    });
+    six_button.addEventListener('click', () => {
+        four_button.querySelector("img").src = 
+            "/Assets/Game Settings/4 Shapes Button.png";
+        five_button.querySelector("img").src = 
+            "/Assets/Game Settings/5 Shapes Button.png";
+        six_button.querySelector("img").src = 
+            "/Assets/Game Settings/6 Shapes Button (Green).png";
+        shapes = 6;
+    });
+
+    play_button.addEventListener('click', () => {
+        start_game(shapes);        
+        let divsToHide = document.getElementsByClassName("instructions");
+        for (let v = 0; v<divsToHide.length; v++){
+            divsToHide[v].hidden = true;
+        }
+        document.getElementById("gameSettings").hidden = true;
+        
+    });
 }
 
 function end_screen(game) {
@@ -147,7 +200,7 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("resultsScreen").hidden = true;
 
         canvas.style.border = "5px solid #b8c1ec";
-        create_start_button();
+        document.getElementById("gameSettings").hidden = false;
     });
     setup();
 });

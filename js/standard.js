@@ -150,7 +150,7 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("resultsScreen").hidden = true;
 
         canvas.style.border = "5px solid #b8c1ec";
-        settings_screen();
+        create_start_button();
     });
     setup();
 });

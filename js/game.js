@@ -342,6 +342,9 @@ export class Game{
             this.streak = 0;
             playSound("incorrect", 0.5);
             canvas.style.border = "5px solid red";
+            if (this.num_bubbles < (this.current_round + 1)){
+                this.create_bubbles(1);
+            }
             document.getElementById(`bubble_${this.current_round}`).src = "/Assets/Game_Page/Game/New_Incorrect_Bubble.png"
         }
         this.rounds[this.current_round].clear_buttons();
