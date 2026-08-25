@@ -67,6 +67,9 @@ async function start_game(num) {
     
     if (userError || !userData?.user) {
         console.error("No logged-in user found:", userError?.message);
+        const canvasMessage = document.getElementById("canvasMessage");
+        canvasMessage.textContent = "No logged-in user found!";
+        canvasMessage.hidden = false;
         return;
     }
     
