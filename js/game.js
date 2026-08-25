@@ -295,7 +295,9 @@ export class Game{
 
     new_round(){
         const maxRetries = 7;
-        this.num_shapes += (1/this.max_rounds);
+        if (this.max_rounds > 0){
+            this.num_shapes += (1/this.max_rounds);
+        }
 
         for (let retry = 0; retry < maxRetries; retry++) {
             const round = this.generate_shapes();
@@ -502,6 +504,7 @@ async end_session_db(){
     }
 
     async start_round(){
+        console.log(this.num_shapes);
         this.rounds[this.current_round].draw_images();
         await sleep(300)
         this.rounds[this.current_round].clear_drawings();
