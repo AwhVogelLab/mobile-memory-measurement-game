@@ -2,6 +2,7 @@
 <head>
     <title>Play</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/game_select.css">
 </head>
 <body>
     <div id="header"></div>
@@ -14,9 +15,31 @@
             });
     </script>
     
+<div id="gameSelect" class="gameSelect">
+    <div class="background_tint"></div>
+    <div class="select_screen">
+        <img src="/Assets/Game_Select_Page/Sandy Background.png">
 
+        <div class="goldfish"></div>
+        <div class="select_icon">
+            <img src="/Assets/Game_Select_Page/Select a Game Mode Icon.png">
+        </div>
+        <div class="select_gamemode"></div>
+
+        <button id="home_button" class="home_button">
+            <img src="/Assets/Game_Select_Page/Return to Home Button.png">
+        </button>
+        <button id="normal_mode" class="normal_mode">
+            <img src="/Assets/Game_Select_Page/Normal Mode Button.png">
+        </button>
+        <button id="streak_mode" class="streak_mode">
+            <img src="/Assets/Game_Select_Page/Streak Mode Button.png">
+        </button>
+    </div>
+
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script type="module" src="/js/SupabaseClient.js"></script>
-<script type="module" src="/js/play.js"></script>
+<script type="module" src="/js/select_game.js"></script>
 </body>

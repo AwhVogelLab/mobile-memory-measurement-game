@@ -242,7 +242,7 @@ export class Game{
         let temp_image_folders = [...image_folders];
         let temp_colors = [...colors];
         
-        for (let i = 0; i < this.num_shapes; i++){
+        for (let i = 0; i < Math.floor(this.num_shapes); i++){
             //create image variable
             let image = new Shape_obj();
 
@@ -294,10 +294,11 @@ export class Game{
     }   
 
     new_round(){
-        const maxRetries = 5;
+        const maxRetries = 7;
+        this.num_shapes += (1/this.max_rounds);
 
         for (let retry = 0; retry < maxRetries; retry++) {
-            const round = this.generate_shapes(this.num_shapes);
+            const round = this.generate_shapes();
 
             if (round !== null) {
                 this.rounds.push(round);
@@ -506,7 +507,7 @@ async end_session_db(){
         this.rounds[this.current_round].clear_drawings();
         await sleep(1000)
 
-        let s = Math.floor(Math.random()*this.num_shapes);
+        let s = Math.floor(Math.random()*Math.floor(this.num_shapes));
         if (Math.random() > 0.5) {
             this.rounds[this.current_round].change_one_shape(s)
         }

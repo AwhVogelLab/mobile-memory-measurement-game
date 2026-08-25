@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Standard Play</title>
+    <title>Sandbox Mode</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/game.css">
     <style>
@@ -40,7 +40,7 @@
     </div>
 
     <div class="infoPanel" id="infoPanel">
-        <h2 class="instructions">Standard Play</h2>
+        <h2 class="instructions">Sandbox</h2>
         <p class="instructions">Click the shape that changed.</p>
         <p id="roundDisplay">Round: 1</p>
         <p id="pointDisplay">Points: 0</p>
@@ -73,8 +73,38 @@
 
 </div>
 
+<div id="gameSettings" class="gameSettings" hidden>
+    <div class="background_tint"></div>
+    <div class="new_game">
+        <img src="/Assets/Game Settings/Blank Settings UI.png">
+
+        <button id="four_button" class="four_button">
+            <img src="/Assets/Game Settings/4 Shapes Button.png">
+        </button>
+        <button id="five_button" class="five_button">
+            <img src="/Assets/Game Settings/5 Shapes Button (Green).png">
+        </button>
+        <button id="six_button" class="six_button">
+            <img src="/Assets/Game Settings/6 Shapes Button.png">
+        </button>
+
+        <button id="add_button" class="add_button">
+            <img src="/Assets/Game Settings/Add Icon.png">
+        </button>
+        <button id="subtract_button" class="subtract_button">
+            <img src="/Assets/Game Settings/Subtract Icon.png">
+        </button>
+        <button id="play_button" class="play_button">
+            <img src="/Assets/Game Settings/Play Button.png">
+        </button>
+        <div id="numRounds" class="numRounds"></div>
+    </div>
+
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script type="module" src="/js/SupabaseClient.js"></script>
-<script type="module" src="/js/standard.js"></script>
+<script type="module" src="/js/sandbox.js"></script>
 
 </html>
