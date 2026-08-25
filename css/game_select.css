@@ -69,8 +69,8 @@
 
 .normal_mode {
     position: absolute;
-    height: 100px;
-    width: auto;
+    height: auto;
+    width: 95%;
     top: 45%;
     left: 2.5%;
     background: transparent;
@@ -78,13 +78,25 @@
     cursor: pointer;
 }
 
+.normal_mode img {
+    display: block;
+    width: 100%;
+    height: auto;
+}   
+
 .streak_mode {
     position: absolute;
-    height: 100px;
-    width: auto;
+    height: auto;
+    width: 95%;
     top: 67%;
     left: 2.5%;
     background: transparent;
     border: none;
     cursor: pointer;
 }
+
+.streak_mode img {
+    display: block;
+    width: 100%;
+    height: auto;
+}  
