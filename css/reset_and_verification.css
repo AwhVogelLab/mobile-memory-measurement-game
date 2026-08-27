@@ -19,15 +19,15 @@ input, textarea {
 
 
 .background_and_logo {
+    transform: translate(0px, 50px);
     display: block;
     width: 100%;
     height: 100%;
     z-index: 0;
 }
-
-.input_containers {
+.input_containers_new_pswd {
     position: absolute;
-    top: 48%;
+    top: 60%; /*changed how far down it is here*/
     left: 5%;
     width: 95%;
     height:100%;
@@ -38,10 +38,9 @@ input, textarea {
     row-gap: 2vh;
     z-index: 1;
 }
-
-.input_containers_signup {
+.input_containers_reset_pswd {
     position: absolute;
-    top: 48%;
+    top: 68%; /*changed how far down it is here*/
     left: 5%;
     width: 95%;
     height:100%;
@@ -49,7 +48,7 @@ input, textarea {
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: 3vh;
+    row-gap: 2vh;
     z-index: 1;
 }
 
@@ -64,15 +63,9 @@ input, textarea {
 .input_box {
     width: 95%;
 }
-.forgot_password {
-    align-self: flex-end;
-    height: 35px;
-}
 .button {
     width: 80%;
 }
-.line {
-    width: 95%;
+.paragraph {
+    width: 90%;
 }
-
-

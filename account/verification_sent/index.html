@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+    <title>Forgot Password</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/reset_and_verification.css">
+</head>
+<body>
+    <div id="header"></div>
+
+    <script>
+        fetch("/header.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("header").innerHTML = data;
+            });
+    </script>
+    
+    <!-- [Start] All new Code -->
+    <div id="input_new_password" class="whole_page">
+        <img src="/Assets/Account/Verify Email Sent Page/Verify Email Logo + Background.png" class="background_and_logo">
+
+        <div id="all_assets_here" class="input_containers_new_pswd">
+            <img src="/Assets/Account/Verify Email Sent Page/Email.png" class="paragraph">
+
+            <img src="/Assets/Account/Verify Email Sent Page/Resend verification email.png" class="txt_h1">
+        </div>
+    </div>
+    <!-- [End] All new Code -->
+</body>

@@ -3,6 +3,7 @@
     <title>Log In</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/login.css">
+    <meta name="login" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <div id="header"></div>
@@ -14,26 +15,54 @@
                 document.getElementById("header").innerHTML = data;
             });
     </script>
+
+    <!-- [Start] All new Code -->
+     <!-- 
+    <div id="all_login_page" class="whole_page">
+        <img src="/Assets/Account/Login_Page/Login Background.png" class="background_and_logo">
+
+        <div id="input_containers" class="input_containers">
+            <div id="email_input" class="email_input">
+                <img src="/Assets/Account/email.png" class="txt_h1">
+                <img src="/Assets/Account/Email Input Box.png" class="input_box">
+            </div>
+
+            <div id="password_input" class="password_input">
+                <img src="/Assets/Account/password.png" class="txt_h1">
+                <img src="/Assets/Account/Password Input Box.png" class="input_box">
+            </div>
+            <img src="/Assets/Account/Forgot password.png" class="forgot_password">
+
+            <img src="/Assets/Account/Login_Page/Sign In Button.png" class="button">
+
+            <img src="/Assets/Account/Login_Page/Line 17.png" class="line">
+
+            <img src="/Assets/Account/Login_Page/dont have an account_ sign up.png" class="txt_h2">
+        </div>
+    </div>
+    -->
+    <!-- [End] All new Code -->
+    
     
     <h1>Log in</h1>
 
- <form id="loginForm">
-    <label for="email">Email:</label>
-    <input type="text" id="email" name="email" placeholder="Enter your email">
+    <form id="loginForm">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" placeholder="Enter your email">
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" placeholder="Enter your password">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password">
 
-    <p id="loginError" style="display: none; color: red;">
-        Invalid email or password.
-    </p>
+        <p id="loginError" style="display: none; color: red;">
+            Invalid email or password.
+        </p>
 
-    <button type="submit">Log In</button>
-    <a href="/account/sign_up/">Sign Up</a>
-    <a href="/account/forgot_password/">Forgot Password?</a>
-</form>
+        <button type="submit">Log In</button>
+        <a href="/account/sign_up/">Sign Up</a>
+        <a href="/account/forgot_password/">Forgot Password?</a>
+    </form>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script type="module" src="/js/SupabaseClient.js"></script>
-<script type="module" src="/js/login.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script type="module" src="/js/SupabaseClient.js"></script>
+    <script type="module" src="/js/login.js"></script>
 </body>
