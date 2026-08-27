@@ -25,9 +25,10 @@ input, textarea {
     z-index: 0;
 }
 
-.input_containers {
+.input_containers,
+.input_containers_signup,
+.input_containers_reset_pswd {
     position: absolute;
-    top: 48%;
     left: 5%;
     width: 95%;
     height:100%;
@@ -35,22 +36,22 @@ input, textarea {
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: 2vh;
     z-index: 1;
 }
 
-.input_containers_signup {
-    position: absolute;
+.input_containers {
     top: 48%;
-    left: 5%;
-    width: 95%;
-    height:100%;
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    row-gap: 2vh;
+}
+
+.input_containers_signup{
+    top: 48%;
     row-gap: 3vh;
-    z-index: 1;
+}
+
+.input_containers_reset_pswd {
+    top: 62%;
+    row-gap: 3vh;
 }
 
 .txt_h1 {
@@ -61,14 +62,38 @@ input, textarea {
     height: 50px;
     z-index:1;
 }
-.input_box {
+.email_input,
+.password_input{
     width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.email_input_box, 
+.password_input_box {
+    width: 100%;
+    height: 50px;
+
+    border: none;
+    outline: none;
+
+    box-sizing: border-box;
+    padding: 0 15px;
+
+    font-size: 16px;
+    color: #000;
 }
 .forgot_password {
     align-self: flex-end;
     height: 35px;
 }
 .button {
+    width: 80%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.button img {
     width: 80%;
 }
 .line {
