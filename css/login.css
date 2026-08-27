@@ -25,9 +25,10 @@ input, textarea {
     z-index: 0;
 }
 
-.input_containers {
+.input_containers,
+.input_containers_signup,
+.input_containers_reset_pswd {
     position: absolute;
-    top: 48%;
     left: 5%;
     width: 95%;
     height:100%;
@@ -35,22 +36,22 @@ input, textarea {
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: 2vh;
     z-index: 1;
 }
 
-.input_containers_signup {
-    position: absolute;
+.input_containers {
     top: 48%;
-    left: 5%;
-    width: 95%;
-    height:100%;
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    row-gap: 2vh;
+}
+
+.input_containers_signup{
+    top: 48%;
     row-gap: 3vh;
-    z-index: 1;
+}
+
+.input_containers_reset_pswd {
+    top: 62%;
+    row-gap: 3vh;
 }
 
 .txt_h1 {

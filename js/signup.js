@@ -39,5 +39,13 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
 
     await createPlayerRow(user.id, email); // using email as display_name for now
 
-    window.location.href = "/index.html"; // adjust to wherever standard/freeplay actually lives
+    const successMessage = document.getElementById("signupSuccess");
+
+    successMessage.style.display = "block";
+    successMessage.textContent =
+        `Account created! Please check ${email} for a verification email.`;
+
+    console.log("Verification email sent to:", email);
+
+    // window.location.href = "/index.html"; // adjust to wherever standard/freeplay actually lives
 });

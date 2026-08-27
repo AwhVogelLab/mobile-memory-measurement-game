@@ -16,44 +16,38 @@
     </script>
 
     <!-- [Start] All new Code -->
-    <!-- <img src="/Assets/Account/Sign_Up_Page/← Back to Log in.png" class="back_button">
+    <a href="/account/log_in/" class="button">
+        <img src="/Assets/Account/Sign_Up_Page/Back to Log in.png">
+    </a>
 
     <div id="sign_up_page" class="whole_page">
         <img src="/Assets/Account/Sign_Up_Page/Sign Up Background.png" class="background_and_logo">
 
-        <div id="input_containers_signup" class="input_containers_signup">
+        <form id="signupForm" class="input_containers_signup">
+
             <div id="email_input" class="email_input">
                 <img src="/Assets/Account/email.png" class="txt_h1">
-                <img src="/Assets/Account/Email Input Box.png" class="input_box">
+
+                <input type="email" id="email" name="email" placeholder="Enter your email" class="email_input_box" required>
             </div>
 
             <div id="password_input" class="password_input">
                 <img src="/Assets/Account/password.png" class="txt_h1">
-                <img src="/Assets/Account/Password Input Box.png" class="input_box">
+
+                <input type="password" id="password" name="password" placeholder="Enter your password" class="password_input_box" required>
             </div>
 
-            <img src="/Assets/Account/Sign_Up_Page/Sign Up Button.png" class="button">
-        </div>
-    </div> -->
+            <button type="submit" class="button">
+                <img src="/Assets/Account/Sign_Up_Page/Sign Up Button.png" alt="Sign Up">
+            </button>
+
+            <p id="signupError" style="display: none; color: red;"> Unable to validate email address. </p>
+            <p id="signupSuccess" style="display: none;"></p>
+
+        </form>
+    </div>
     <!-- [End] All new Code -->
     
-
-
-    <h1>Sign up</h1>
-
-    <form id="signupForm">
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email" placeholder="Enter your email">
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password">
-
-        <p id="signupError" style="display: none; color: red;">
-            Unable to validate email address.
-        </p>
-
-        <button type="submit">Sign Up</button>
-    </form>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script type="module" src="/js/SupabaseClient.js"></script>
