@@ -61,9 +61,7 @@ export class Shape_obj{
         ctx.drawImage(img, this.position[0], this.position[1], size, size)
     }
     //creates a button on the canvas
-    create_button(size, onClick) {
-        const container = document.getElementById("canvasContainer");
-
+    create_button(size, onClick, parent) {
         const button = document.createElement("button");
         button.style.position = "absolute";
         button.style.border = "none";
@@ -84,9 +82,9 @@ export class Shape_obj{
             onClick(this);
         });
 
-        container.appendChild(button);
-
         button.classList.add("shape-button");
+
+        parent.appendChild(button);
 
         return button;
     }
@@ -148,9 +146,15 @@ export class Round{
         this.drawn = true;
     }
     display_buttons(click_event){
+        const container = document.getElementById("canvasContainer");
+
+        const fragment = document.createDocumentFragment();
         for (let i = 0; i < this.shapes.length; i++){
-            this.shapes[i].create_button(img_size, click_event);
+            this.shapes[i].create_button(img_size, click_event, fragment);
         }
+
+        container.appendChild(fragment);
+
         this.drawn_as_button = true;
     }
     clear_drawings(){
