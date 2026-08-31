@@ -5,7 +5,7 @@ document.getElementById("forgotForm").addEventListener("submit", async (e) => {
     const email = document.getElementById("email").value;
 
 const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: "https://glittering-moxie-d2fa93.netlify.app/account/reset_password/",
+    redirectTo: "https://trackmymemory.com/account/reset_password/",
 });
 
     if (error) {
