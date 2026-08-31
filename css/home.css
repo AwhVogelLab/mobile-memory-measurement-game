@@ -3,6 +3,8 @@ body {
   padding: 0; 
 }
 
+
+
 .home_top {
     position: relative;
     display: flex;
@@ -11,6 +13,11 @@ body {
     align-items: center;
 }
 
+.title {
+    width: 200px;
+    align-items: center;
+    margin: 30px;
+}
 
 .level_bar {
     margin-left: -130px;
@@ -119,6 +126,14 @@ p {
   object-fit: cover;
   object-position: center;
   z-index: 0;
+}
+
+.goal_text_box {
+    width: 280px;
+    display: block;
+    z-index: 1;
+    position: relative;
+    top: -10%;
 }
 
 .dailies{
