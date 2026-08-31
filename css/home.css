@@ -61,15 +61,6 @@ p {
     justify-content: center;
     align-items: center;
 }
-.profile_icon {
-    width: 65px;
-}
-.menu_icon {
-    width: 65px;
-    margin-top: 20px;
-}
-
-
 
 .play_and_goldfish { /*container*/
     position: relative;
