@@ -44,7 +44,8 @@ body {
     z-index: 1000;
 }
 
-.nav-button {
+.nav-button,
+.nav {
     display: block;
     padding: 0;
     border: none;
@@ -52,7 +53,8 @@ body {
     cursor: pointer;
 }
 
-.nav-button img {
+.nav-button img,
+.nav {
     display: block;
     width: 8vw;
     min-width: 50px;
