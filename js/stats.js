@@ -97,6 +97,9 @@ async function loadBestShapeAndColor(userId) {
 
         document.querySelector("#shape_and_name img").src =
     `/shapes_updated/${bestShape}/${bestShape}_white.png`;
+
+    document.querySelector("#color_and_name img").src =
+    `/shapes_updated/circle/circle_${bestColor}.png`;
 }
 
 

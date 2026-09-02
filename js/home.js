@@ -1,15 +1,13 @@
-const profileIcon = document.querySelector(".profile_icon");
-const statsButton = document.querySelector(".shapes_correct_box");
+import { supabase } from "./SupabaseClient.js";
+
 const playButton = document.querySelector(".play_button");
 
-profileIcon.addEventListener("click", () => {
-    window.location.href = "/stats/";
-});
-
-statsButton.addEventListener("click", () => {
-    window.location.href = "/stats/";
-});
+const { data: { user } } = await supabase.auth.getUser();
 
 playButton.addEventListener("click", () => {
-    window.location.href = "/play/standard/";
+    window.location.href = "/play/";
 });
+
+if (!user) {
+  window.location.href = "/landing_page/";
+}
