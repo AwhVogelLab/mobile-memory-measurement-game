@@ -1,4 +1,5 @@
 import { supabase } from "./SupabaseClient.js";
+const { data: { user } } = await supabase.auth.getUser();
 
 async function logIn(email, password) {
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
@@ -47,3 +48,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
         window.location.href = "/index.html"; // adjust to match signup.js's redirect
     }
 });
+
+if (user) {
+  window.location.href = "/";
+}

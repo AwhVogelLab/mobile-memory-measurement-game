@@ -1,4 +1,5 @@
 import { supabase } from "./SupabaseClient.js";
+const { data: { user } } = await supabase.auth.getUser();
 
 async function signUp(email, password) {
   const { data, error } = await supabase.auth.signUp({ email, password });
@@ -49,3 +50,7 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
 
     // window.location.href = "/index.html"; // adjust to wherever standard/freeplay actually lives
 });
+
+if (user) {
+  window.location.href = "/";
+}
