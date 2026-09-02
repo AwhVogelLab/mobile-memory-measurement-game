@@ -2,8 +2,8 @@ const loginButton = document.querySelector(".login_button");
 
 const playButton = document.querySelector(".button");
 
-playButton.addEventListener("click", () => {
-    window.location.href = "/account/login";
+loginButton.addEventListener("click", () => {
+    window.location.href = "/account/log_in";
 });
 
 playButton.addEventListener("click", () => {
