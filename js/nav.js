@@ -1,10 +1,6 @@
 import { supabase } from "./SupabaseClient.js";
 
-console.log("JS FILE LOADED");
-
 const signOutButton = document.getElementById("log-out");
-
-console.log("Button:", signOutButton);
 
 signOutButton.addEventListener("click", () => {
     handleSignOut();
